@@ -25,6 +25,7 @@ class Welcome extends CI_Controller {
 
     public function hmvc()
     {
-        $this->load->view('welcome_message_hmvc');
+        //$this->load->view('welcome_message_hmvc');
+        echo $this->twig->render('welcome_message_hmvc.twig');
     }
 }
