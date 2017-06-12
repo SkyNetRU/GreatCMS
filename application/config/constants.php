@@ -1,6 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+// Name of the "GreatCms" directory (Name 0f CMS)
+define('GREATCMS', 'GreatCms');
+
+
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace

@@ -36,10 +36,15 @@ class Twig
 
 	public function render($template, $data = array()) {
 
-        $template = $this->_twig->loadTemplate($template.EXT);
+        $template = $this->_twig->loadTemplate($template.'.twig'.EXT);
 
         return $template->render($data);
 	}
+
+    public function show($template, $data = array()) {
+        echo $this::render($template, $data);
+        return;
+    }
 }
 
 ?>

@@ -64,7 +64,7 @@ class Modules
 		}
 
 		if($class = self::load($module)) 
-		{	
+		{
 			if (method_exists($class, $method))	{
 				ob_start();
 				$args = func_get_args();

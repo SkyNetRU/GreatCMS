@@ -28,3 +28,4 @@
 <div class="blog-footer">
     <p>{{ sitename }} - {{ adress }} - {{ tel1 }}  by <a href="http://polyakov.co.ua">zhenya_polyakov</a>.</p>
 </div>
+{{ this_page }}

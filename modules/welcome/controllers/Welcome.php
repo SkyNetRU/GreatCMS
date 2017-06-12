@@ -1,31 +1,31 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {exit('No direct script access allowed');}
 
-class Welcome extends CI_Controller {
+class Welcome extends MX_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+    function __construct()
+    {
+        parent::__construct();
+    }
+
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$data = array();
+
+        $data += $this->settings;
+        //var_dump($data);
+        $data['content'] = ' Welcome page with new controllers';
+        //$this->main_lib->render_main_page($data);
+        $data['this_page'] = 'site/index.tpl.twig.php';
+        $this->twig->show('site/index.tpl',$data);
+        //$this->twig->show('welcome_message_hmvc',$data);
 	}
 
     public function hmvc()
     {
-        //$this->load->view('welcome_message_hmvc');
-        echo $this->twig->render('welcome_message_hmvc.twig');
+        $data = array();
+        $data['content'] = ' Welcome page with new controllers';
+        //$this->main_lib->render_main_page($data);
+        $this->twig->show('welcome_message_hmvc',$data);
     }
+
 }

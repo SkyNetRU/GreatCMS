@@ -39,6 +39,7 @@ require dirname(__FILE__).'/Base.php';
 class MX_Controller 
 {
 	public $autoload = array();
+    public $settings = array();
 	
 	public function __construct() 
 	{
@@ -52,10 +53,25 @@ class MX_Controller
 		
 		/* autoload module items */
 		$this->load->_autoloader($this->autoload);
+        // debugging and optimization
+        $this->output->enable_profiler($this->config->item('develop'));
+        $this->load->model('settings_model');
+        $this->settings = $this::getSettings();
 	}
 	
 	public function __get($class) 
 	{
 		return CI::$APP->$class;
 	}
+
+    public function getSettings (){
+        return $this->settings_model->getSettings();
+    }
+
+    public function getOneSetting ($name = null){
+        if ($name == null){
+            return false;
+        }
+        return $this->settings_model->getOneSetting($name);
+    }
 }
