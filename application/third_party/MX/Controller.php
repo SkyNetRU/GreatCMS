@@ -49,14 +49,16 @@ class MX_Controller
 		
 		/* copy a loader instance and initialize */
 		$this->load = clone load_class('Loader');
-		$this->load->initialize($this);	
-		
+		$this->load->initialize($this);
+
 		/* autoload module items */
 		$this->load->_autoloader($this->autoload);
         // debugging and optimization
         $this->output->enable_profiler($this->config->item('develop'));
         $this->load->model('settings_model');
         $this->settings = $this::getSettings();
+        $this->load->library('layout');
+        $this->load->add_package_path(APPPATH.'third_party/ion_auth/');
 	}
 	
 	public function __get($class) 
@@ -74,4 +76,5 @@ class MX_Controller
         }
         return $this->settings_model->getOneSetting($name);
     }
+
 }

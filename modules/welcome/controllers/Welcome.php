@@ -12,20 +12,16 @@ class Welcome extends MX_Controller {
 		$data = array();
 
         $data += $this->settings;
-        //var_dump($data);
         $data['content'] = ' Welcome page with new controllers';
-        //$this->main_lib->render_main_page($data);
-        $data['this_page'] = 'site/index.tpl.twig.php';
-        $this->twig->show('site/index.tpl',$data);
-        //$this->twig->show('welcome_message_hmvc',$data);
+        $data['this_page'] = 'site/index.tpl.php';
+        $this->parser->parse("site/index.tpl", $data);
 	}
 
     public function hmvc()
     {
         $data = array();
         $data['content'] = ' Welcome page with new controllers';
-        //$this->main_lib->render_main_page($data);
-        $this->twig->show('welcome_message_hmvc',$data);
+        $this->parser->parse("site/welcome_message_hmvc", $data);
     }
 
 }
