@@ -18,21 +18,20 @@
                                 <tr>
                                     <td>
                                         <div class="pull-right">
-                                            <a class="btn btn-primary" href="<?php echo site_url('page/show_text/'.$page->id) ?>" target="_blank">Preview</a>
-                                            <a class="btn btn-primary" href="<?php echo site_url('page/edit_page/' . $page->id) ?>">Edit Page</a>
-                                            <a class="btn btn-primary" href="<?php echo site_url('page/delete_page/' . $page->id) ?>" class="dropdown-item" onclick="if(!confirm('Are you sure you want to delete this page?')){ return false; }">Delete Page</a>
+                                            <a class="btn btn-primary" href="<?php echo site_url('gc-admin/Page/show_text/'.$page->id) ?>" target="_blank">Preview</a>
+                                            <a class="btn btn-primary" href="<?php echo site_url('gc-admin/Pages/edit_page/' . $page->id) ?>">Edit Page</a>
+                                            <a class="btn btn-primary" href="<?php echo site_url('gc-admin/Page/delete_page/' . $page->id) ?>" class="dropdown-item" onclick="if(!confirm('Are you sure you want to delete this page?')){ return false; }">Delete Page</a>
                                         </div>
                                         <div id="1" class="item-title">
                                             <a id="user_d" class="_500"
                                                href="#"> <?php echo $page->title ?></a>
                                         </div>
-                                        <small
-                                            class="block text-muted text-ellipsis"> <?php //echo $page->content ?> </small>
+                                        <small  class="block text-muted text-ellipsis"> <?php //echo $page->content ?> </small>
                                     </td>
                                 </tr>
                             <?php }
-                        }else{?>
-                            <div class="alert alert-info">There are no plugins installed.</div>
+                        }else {?>
+                            <div class="alert alert-info">There are no pages yet, let's create new one.</div>
                         <?php }?>
                         </tbody>
                     </table>

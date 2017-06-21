@@ -44,12 +44,12 @@ class Pages extends MX_Controller
             'msg' => $this->functions->show_msg($msg, $type)
         );
 
-        $config['base_url'] = base_url() . 'gc-admin/pages/';
+        $config['base_url'] = base_url() . 'gc-admin/pages/list/';
         $config['total_rows'] = 3;
         $config['per_page'] = 3;
         $config['page_query_string'] = TRUE;
-        $data['page_title'] = 'GreatCMS Dashboard';
-        $data['meta_description'] = 'GreatCMS Dashboard';
+        $data['page_title'] = 'Pages List';
+        $data['meta_description'] = 'GreatCMS Pages List';
 
         $this->pagination->initialize($config);
         $this->layout->_render("Pages/page_list", $data);
@@ -64,12 +64,34 @@ class Pages extends MX_Controller
     }
 
     public function edit_page($id){
-        if(!$this->session->userdata('login')) {
-            redirect('login');
-        }else {
-            $data['page'] = $this->page_model->get_page($id);
-            $this->load->view('add_page',$data);
-        }
+
+        $this->layout->css[] = '/assets/dist/keditor/css/keditor-1.1.4.min.css';
+        $this->layout->css[] = '/assets/dist/keditor/keditor-components-1.1.4.min.css';
+        $this->layout->css[] = '/assets/libs/fileuploader/jquery.fileuploader.css';
+        $this->layout->css[] = '/assets/global/plugins/ckeditor/skins/moono/editor.css';
+
+        $this->layout->bottom_js[] = '/assets/vendor/jquery.nicescroll-3.6.6/jquery.nicescroll.min.js';
+
+        $this->layout->bottom_js[] = '/assets/vendor/ckeditor-4.5.6/ckeditor.js';
+        $this->layout->bottom_js[] = '/assets/vendor/ckeditor-4.5.6/adapters/jquery.js';
+
+//                $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/config.js';
+//        $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/lang/en.js';
+//        $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/styles.js';
+//        $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/ckeditor.js';
+
+        //$this->layout->bottom_js[] = '/assets/dist/keditor/js/keditor-1.1.4.js';
+        //$this->layout->bottom_js[] = '/assets/dist/keditor/js/keditor-components-1.1.4.min.js';
+
+        $data['page_title'] = 'Pages List';
+        $data['meta_description'] = 'GreatCMS Pages List';
+        $data['page'] = $this->page_model->get_page($id);
+        $data['csrf'] = array(
+            'name' => $this->security->get_csrf_token_name(),
+            'hash' => $this->security->get_csrf_hash()
+        );
+        //$this->load->view('add_page',$data);
+        $this->layout->_render("Pages/add_page", $data);
     }
 
     public function delete_page($id){

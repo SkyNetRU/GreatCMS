@@ -53,7 +53,8 @@ $config['global']['bottom_js'] = array(
     '/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js',
     '/assets/global/plugins/jquery.blockui.min.js',
     '/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
-    '/assets/global/scripts/app.min.js'
+    '/assets/global/scripts/app.min.js',
+    '/assets/vendor/jquery-ui-1.11.4/jquery-ui.min.js'
 );
 
 //Scripts for IE 9

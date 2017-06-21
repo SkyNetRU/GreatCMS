@@ -140,7 +140,7 @@
         iframeMode: false,
         contentAreasSelector: null,
         contentAreasWrapper: '<div class="keditor-content-areas-wrapper container"></div>',
-        containerSettingEnabled: false,
+        containerSettingEnabled: true,
         containerSettingInitFunction: null,
         containerSettingShowFunction: null,
         containerSettingHideFunction: null,
