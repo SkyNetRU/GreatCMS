@@ -837,6 +837,7 @@
               "data-class" : "",
               "data-padding" : "",
               "data-margin" : "",
+              "data-background_image": "",
               "data-background_repeat" : "no-repeat",
               "data-title_position" : "gm-text-center",
               "data-background_position" : "0 0",
@@ -1392,6 +1393,9 @@
                         } else {
                             $('#'+type+'_settings [data-attrname="' + key + '"]').parent().parent().find('.minicolors-swatch-color, .minicolors-grid').css('background-color', 'transparent');
                         }
+                    } else if (key == 'background_image') {
+                        $('.gm-media-preview').attr('src', value);
+                        $('[data-attrname="background_image"]').val(value);
                     } else {
                         $('#'+type+'_settings [data-attrname="'+ key +'"]').val(value);
                     }

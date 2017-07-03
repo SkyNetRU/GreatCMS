@@ -11,6 +11,7 @@
     <div id="draggable"><p>Slider</p></div>
 </div>
 
+<!--Row Settings Modal-->
 <div class="modal fade" id="row_settings" tabindex="-1" role="basic" aria-hidden="true" >
 <div class="modal-dialog">
 <div class="modal-content">
@@ -179,14 +180,13 @@
 
 <div class="form-group">
     <label>Background Image</label>
-    <img class="sppb-media-preview no-image" alt="">
+    <img class="gm-media-preview no-image" alt="">
     <input type="hidden" data-attrname="background_image"
-           class="input-media sppb-media-input addon-input"
-           value=""
-           id="media-945875">
-    <a href="#" class="sppb-btn sppb-btn-primary sppb-btn-media-manager">Select Image</a>
-    <a class="sppb-btn sppb-btn-danger btn-clear-image" href="#">
-        <i class="icon-remove"></i>
+           class="input-media addon-input"
+           value="">
+    <a class="btn btn-primary bg_image" data-toggle="modal" href="#media_manager">Select Image</a>
+    <a class="btn btn-danger btn-clear-image" href="#">
+        <i class="fa fa-times"></i>
     </a>
     <p class="help-block">Set background images for an element. Always set a background-color to be
         used if the image is unavailable.</p>
@@ -326,8 +326,9 @@
 </div>
 <!-- /.modal-dialog -->
 </div>
+<!--END Row Settings Modal-->
 
-
+<!--Column Settings Modal-->
 <div class="modal fade" id="column_settings" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -430,6 +431,22 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+<!--END Column Settings Modal-->
+
+<div id="media_manager" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Media manager</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row iframe">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var slider = '' +
@@ -452,7 +469,13 @@
 
 <script>
 
+
+
+
+
     $(document).ready(function(){
+
+
 
         $("#mycanvas").gridmanager(
             {
@@ -463,5 +486,40 @@
             }
         );
 
+        $('a.bg_image').click(function () {
+            if ($('#kc_frame').length == 0){
+                $('<iframe frameborder="0" name="kcfinder_iframe"' +
+                'style="width:100%; height:100%; padding: 0px; margin-top: 8px; border-radius: 4px; border: 1px solid rgb(107, 107, 107);' +
+                'box-shadow: rgb(107, 107, 107) 0px 0px 4px; min-height: 800px;" ' +
+                'id="kc_frame" ' +
+                'src="/assets/vendor/ckeditor/plugins/kcfinder/browse.php?type=images"' +
+                '><iframe />').appendTo('.row.iframe');
+            }
+
+            window.KCFinder = {
+                callBack: function(url) {
+                    window.KCFinder = null;
+                    $('[data-attrname="background_image"]').val(url);
+                    $('.gm-media-preview').attr('src', url);
+                    $('#media_manager').modal('hide');
+                }
+            };
+        });
+
+        $('.btn-clear-image').click(function () {
+            $('.gm-media-preview').attr('src', '');
+            $('[data-attrname="background_image"]').val('');
+        });
+
     });
 </script>
+
+
+<!--                    <iframe id="kc_frame"-->
+<!--                            name="kcfinder_alone"-->
+<!--                            src="/assets/vendor/ckeditor/plugins/kcfinder/browse.php?type=images&CKEditor=editor2&CKEditorFuncNum=111&langCode=ru"-->
+<!--                            frameborder="0" width="100%" height="100%"-->
+<!--                            style="padding: 0px; margin-top: 8px;-->
+<!--                            border-radius: 4px; border: 1px solid rgb(107, 107, 107);-->
+<!--                            box-shadow: rgb(107, 107, 107) 0px 0px 4px; height: 794px;"></iframe>-->
+

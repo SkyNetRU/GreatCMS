@@ -25,3 +25,10 @@
     padding-bottom: 10px;
     text-align: center;
 }
+
+img.gm-media-preview.no-image {
+    max-width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    max-height: 300px;
+}
