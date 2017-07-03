@@ -18,9 +18,9 @@
                                 <tr>
                                     <td>
                                         <div class="pull-right">
-                                            <a class="btn btn-primary" href="<?php echo site_url('gc-admin/Page/show_text/'.$page->id) ?>" target="_blank">Preview</a>
-                                            <a class="btn btn-primary" href="<?php echo site_url('gc-admin/Pages/edit_page/' . $page->id) ?>">Edit Page</a>
-                                            <a class="btn btn-primary" href="<?php echo site_url('gc-admin/Page/delete_page/' . $page->id) ?>" class="dropdown-item" onclick="if(!confirm('Are you sure you want to delete this page?')){ return false; }">Delete Page</a>
+                                            <a class="btn btn-primary" href="<?php echo site_url('Pages/show_text/'.$page->id) ?>" target="_blank">Preview</a>
+                                            <a class="btn btn-primary" href="<?php echo site_url('Pages/edit_page/' . $page->id) ?>">Edit Page</a>
+                                            <a class="btn btn-primary" href="<?php echo site_url('Pages/delete_page/' . $page->id) ?>" class="dropdown-item" onclick="if(!confirm('Are you sure you want to delete this page?')){ return false; }">Delete Page</a>
                                         </div>
                                         <div id="1" class="item-title">
                                             <a id="user_d" class="_500"

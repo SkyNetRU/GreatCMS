@@ -18,9 +18,7 @@ class Page_model extends CI_Model
                 $this->db->limit($limit, $offset);
         }
 
-
         return ($query->num_rows() > 0) ? $query->result() : FALSE;
-
     }
 
     public function get_page($id)

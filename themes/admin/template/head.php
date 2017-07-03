@@ -14,11 +14,15 @@
     <meta content="Nikolai Demin https://www.upwork.com/fl/nikolaidemin" name="author" />
     <?= $asset_css;?>
     <?= $asset_top_js;?>
-    <link rel="shortcut icon" href="favicon.ico" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/Favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/Favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/Favicon/manifest.json">
 </head>
 <!-- END HEAD -->
 
-<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
+<body class="page-container-bg-solid page-header-fixed <?= $hide_logo ? 'page-sidebar-closed-hide-logo' : ''?>  <?= $sidebar_closed ? 'page-sidebar-closed' : ''?>">
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
 <!-- BEGIN HEADER INNER -->
@@ -214,7 +218,7 @@
                 <li>
                     <a href="#">
                                                     <span class="photo">
-                                                        <img src="/assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="/assets/layouts/layout4/img/avatar2.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Lisa Wong </span>
                                                         <span class="time">Just Now </span>
@@ -225,7 +229,7 @@
                 <li>
                     <a href="#">
                                                     <span class="photo">
-                                                        <img src="/assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="/assets/layouts/layout4/img/avatar3.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Richard Doe </span>
                                                         <span class="time">16 mins </span>
@@ -236,7 +240,7 @@
                 <li>
                     <a href="#">
                                                     <span class="photo">
-                                                        <img src="/assets/layouts/layout3/img/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="/assets/layouts/layout4/img/avatar1.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Bob Nilson </span>
                                                         <span class="time">2 hrs </span>
@@ -247,7 +251,7 @@
                 <li>
                     <a href="#">
                                                     <span class="photo">
-                                                        <img src="/assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="/assets/layouts/layout4/img/avatar2.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Lisa Wong </span>
                                                         <span class="time">40 mins </span>
@@ -258,7 +262,7 @@
                 <li>
                     <a href="#">
                                                     <span class="photo">
-                                                        <img src="/assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="/assets/layouts/layout4/img/avatar3.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Richard Doe </span>
                                                         <span class="time">46 mins </span>

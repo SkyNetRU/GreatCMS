@@ -13,6 +13,9 @@ class Auth extends MX_Controller {
         $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
         $this->lang->load('auth');
+
+        //Define locale of the site
+        $this->layout->locale = 'admin';
     }
 
     // redirect if needed, otherwise display the user list

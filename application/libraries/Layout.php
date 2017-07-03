@@ -20,6 +20,8 @@ class Layout
     public $bottom_js = array();
     public $bottom_js_ie9 = array();
     public $view_js = array();
+    public $sidebar_closed = false;
+    public $hide_logo = false;
 
     public function __construct () {
         $this->CI =& get_instance();
@@ -54,8 +56,10 @@ class Layout
 
         //Render Header
         if ($this->header) {
+            $data['hide_logo'] = $this->hide_logo;
             $data['asset_css'] = $this->assets['asset_css'];
             $data['asset_top_js'] = $this->assets['asset_top_js'];
+            $data['sidebar_closed'] = $this->sidebar_closed;
             $header = $this->CI->load->view($this->header, $data, $return);
         }
 

@@ -30,6 +30,23 @@ class Pages extends MX_Controller
     }
 
     public function index($msg = "", $type = "") {
+
+        //Load Module CSS's
+        $this->layout->css += array(
+            '/assets/global/plugins/datatables/plugins/responsive/css/responsive.dataTables.min.css',
+            '/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css'
+        );
+
+        //Load Module JS's
+        $this->layout->bottom_js += array(
+            '/assets/global/plugins/jquery.windoze.js',
+            '/assets/global/plugins/datatables/jquery.dataTables.min.js',
+            '/assets/global/plugins/datatables/datatables.min.js',
+            '/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js',
+            '/assets/global/plugins/datatables/plugins/responsive/js/dataTables.responsive.min.js',
+            '/assets/global/plugins/datatables/plugins/responsive/js/responsive.bootstrap.min.js'
+        );
+
         $this->load->library('pagination');
         $offset = $this->input->get("per_page");
         $jsinc = array('plugins.js');
@@ -65,32 +82,33 @@ class Pages extends MX_Controller
 
     public function edit_page($id){
 
-        $this->layout->css[] = '/assets/dist/keditor/css/keditor-1.1.4.min.css';
-        $this->layout->css[] = '/assets/dist/keditor/keditor-components-1.1.4.min.css';
-        $this->layout->css[] = '/assets/libs/fileuploader/jquery.fileuploader.css';
-        $this->layout->css[] = '/assets/global/plugins/ckeditor/skins/moono/editor.css';
+        //Load Module CSS's
+        $this->layout->css += array(
+            '/assets/global/plugins/bxslider/jquery.bxslider.css',
+            '/assets/global/css/jquery.gridmanager.css',
+            '/assets/global/plugins/jquery-minicolors/jquery.minicolors.css'
 
-        $this->layout->bottom_js[] = '/assets/vendor/jquery.nicescroll-3.6.6/jquery.nicescroll.min.js';
+        );
 
-        $this->layout->bottom_js[] = '/assets/vendor/ckeditor-4.5.6/ckeditor.js';
-        $this->layout->bottom_js[] = '/assets/vendor/ckeditor-4.5.6/adapters/jquery.js';
+        //Load Module JS's
+        $this->layout->bottom_js += array(
+            '/assets/global/plugins/jquery.gridmanager.js',
+            '/assets/vendor/ckeditor/ckeditor.js',
+            '/assets/vendor/ckeditor/adapters/jquery.js',
+            '/assets/global/plugins/bxslider/jquery.bxslider.min.js',
+            '/assets/global/plugins/jquery-minicolors/jquery.minicolors.js'
+        );
 
-//                $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/config.js';
-//        $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/lang/en.js';
-//        $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/styles.js';
-//        $this->layout->bottom_js[] = '/assets/global/plugins/ckeditor/ckeditor.js';
-
-        //$this->layout->bottom_js[] = '/assets/dist/keditor/js/keditor-1.1.4.js';
-        //$this->layout->bottom_js[] = '/assets/dist/keditor/js/keditor-components-1.1.4.min.js';
+        //Collapse Left SideBar
+        $this->layout->sidebar_closed = true;
 
         $data['page_title'] = 'Pages List';
         $data['meta_description'] = 'GreatCMS Pages List';
-        $data['page'] = $this->page_model->get_page($id);
+        //$data['page'] = $this->page_model->get_page($id);
         $data['csrf'] = array(
             'name' => $this->security->get_csrf_token_name(),
             'hash' => $this->security->get_csrf_hash()
         );
-        //$this->load->view('add_page',$data);
         $this->layout->_render("Pages/add_page", $data);
     }
 

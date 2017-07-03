@@ -13,14 +13,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['admin']['css'] = array(
     '/assets/layouts/layout4/css/layout.min.css',
     array ('id' => 'style_color', 'file' => '/assets/layouts/layout4/css/themes/default.min.css'),
-    '/assets/layouts/layout4/css/custom.min.css'
+    '/assets/layouts/layout4/css/custom.css'
 );
 
 $config['admin']['top_js'] = array();
 
 $config['admin']['bottom_js'] = array(
     '/assets/layouts/layout4/scripts/layout.min.js',
-//    '/assets/layouts/layout4/scripts/demo.min.js',
     '/assets/layouts/global/scripts/quick-sidebar.min.js',
     '/assets/layouts/global/scripts/quick-nav.min.js'
 );
@@ -40,6 +39,7 @@ $config['global']['css'] = array(
     '/assets/global/plugins/simple-line-icons/simple-line-icons.min.css',
     '/assets/global/plugins/bootstrap/css/bootstrap.min.css',
     '/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css',
+    '/assets/global/plugins/jquery-ui/jquery-ui.min.css',
     array('id' => 'style_components', 'file' => '/assets/global/css/components-rounded.min.css'),
     '/assets/global/css/plugins.min.css'
 );
@@ -47,14 +47,14 @@ $config['global']['css'] = array(
 $config['global']['top_js'] = array();
 
 $config['global']['bottom_js'] = array(
-    '/assets/global/plugins/jquery.min.js',
-    '/assets/global/plugins/bootstrap/js/bootstrap.min.js',
-    '/assets/global/plugins/js.cookie.min.js',
+    '/assets/global/plugins/jquery.min.js', //v1.12.4
     '/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js',
     '/assets/global/plugins/jquery.blockui.min.js',
+    '/assets/global/plugins/jquery-ui/jquery-ui.min.js',
+    '/assets/global/plugins/bootstrap/js/bootstrap.min.js',
     '/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
-    '/assets/global/scripts/app.min.js',
-    '/assets/vendor/jquery-ui-1.11.4/jquery-ui.min.js'
+    '/assets/global/plugins/js.cookie.min.js',
+    '/assets/global/scripts/app.min.js'
 );
 
 //Scripts for IE 9
