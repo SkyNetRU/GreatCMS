@@ -430,20 +430,64 @@
             // Decrease Column Size
             }).on("click", "a.gm-colDecrease", function(){
               var col = $(this).closest("." +gm.options.gmEditClass);
-              var t=gm.getColClass(col);
-                   if(t.colWidth > parseInt(gm.options.colResizeStep, 10)){
-                       t.colWidth=(parseInt(t.colWidth, 10) - parseInt(gm.options.colResizeStep, 10));
-                       col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200);
+
+               $(gm.options.gmRespond).each(function () {
+                   var width = col.data('width_'+this)-1;
+                   if (width > 0){
+                       col.data('width_'+this, width).removeClass('col-'+this+'-'+(width+1))
+                           .addClass('col-'+this+'-'+width);
                    }
+               });
 
             // Increase Column Size
-            }).on("click", "a.gm-colIncrease", function(){
-               var col = $(this).closest("." +gm.options.gmEditClass);
-               var t=gm.getColClass(col);
-                if(t.colWidth < gm.options.colMax){
-                    t.colWidth=(parseInt(t.colWidth, 10) + parseInt(gm.options.colResizeStep, 10));
-                    col.switchClass(t.colClass, gm.options.currentClassMode + t.colWidth, 200);
-                }
+            }).on("click", "a.gm-colIncrease", function() {
+               var col = $(this).closest("." + gm.options.gmEditClass);
+               $(gm.options.gmRespond).each(function () {
+                   var width = col.data('width_'+this)+1;
+                   if (width < gm.options.colMax){
+                       col.data('width_'+this, width).removeClass('col-'+this+'-'+(width-1))
+                          .addClass('col-'+this+'-'+width);
+                   }
+               });
+
+            // Slide column right (offset)
+            }).on("click", "a.gm-colSlideRight", function () {
+               var col = $(this).closest("." + gm.options.gmEditClass);
+               $(gm.options.gmRespond).each(function () {
+                   if (col.data(this +'_offset')){
+                       var offset = col.data(this +'_offset') + 1;
+                   } else {
+                       var offset = 1;
+                   }
+
+                   if (offset <= gm.options.colMax){
+                       col.data(this +'_offset', offset).removeClass('col-' + this + '-offset-'+(offset - 1))
+                          .addClass('col-' + this + '-offset-'+ offset);
+                   } else {
+                       col.data(this +'_offset', null).removeClass('col-' + this + '-offset-'+(offset - 1));;
+                   }
+               });
+
+               // Slide column Left (offset)
+           }).on("click", "a.gm-colSlideLeft", function () {
+               var col = $(this).closest("." + gm.options.gmEditClass);
+
+               $(gm.options.gmRespond).each(function () {
+                   if (col.data(this +'_offset')){
+                       var offset = col.data(this +'_offset') - 1;
+                   } else {
+                       return false;
+                   }
+                   if (offset > 0){
+                       col.removeClass('col-' + this + '-offset-'+(offset + 1))
+                          .addClass('col-' + this + '-offset-'+ offset)
+                          .data(this +'_offset', offset);
+                   } else {
+                       col.removeClass('col-' + this + '-offset-'+(offset + 1))
+                           .data(this +'_offset', null);
+                   }
+               });
+
 
             // Reset all teh things
             }).on("click", "a.gm-resetgrid", function(){
@@ -810,8 +854,8 @@
         gm.deactivateRows = function(rows){
            gm.log("-- DeActivate Rows");
            rows.removeClass(gm.options.gmEditClass)
-               .removeClass("ui-sortable")
-               .removeAttr("style");
+               .removeClass("ui-sortable");
+               //.removeAttr("style");
         };
 
         /**
@@ -845,7 +889,12 @@
               "data-background_size" : "cover",
               "data-heading_selector" : "h1",
               "data-fluid" : false,
-              "data-background_video" : false
+              "data-background_video" : false,
+              "data-hidden_xs" : false,
+              "data-hidden_sm" : false,
+              "data-hidden_md" : false,
+              "data-hidden_lg" : false
+
           });
             $.each(colWidths, function(i, val){
                 row.append(gm.createCol(val));
@@ -1019,7 +1068,19 @@
              "data-background_color":"",
              "data-color" : "",
              "data-padding" : "",
-             "data-class" : ""
+             "data-class" : "",
+             "data-hidden_xs": false,
+             "data-hidden_sm": false,
+             "data-hidden_md": false,
+             "data-hidden_lg": false,
+             "data-xs_offset": 0,
+             "data-sm_offset": 0,
+             "data-md_offset": 0,
+             "data-lg_offset": 0,
+             "data-width_xs": size,
+             "data-width_sm": size,
+             "data-width_md": size,
+             "data-width_lg": size
          })
             .addClass(gm.options.colClass)
             .addClass(gm.options.colDesktopClass + size)
@@ -1331,7 +1392,6 @@
 
               // Clean column markup
               canvas.find(gm.options.colSelector)
-                  .removeAttr("style")
                   .removeAttr("spellcheck")
                   .removeClass("mce-content-body").end()
               // Clean img markup
@@ -1347,31 +1407,7 @@
               gm.log("~~Cleanup Ran~~");
         };
 
-        /**
-         * Prepare Row Modal, fill it settings
-         * @method prepareRowModal
-         * @param {object} row - row to act on
-         * @returns null
-         */
-        gm.prepareRowModal = function(row) {
-            $.each(row.data(), function(key, value) {
-                value = row.attr('data-'+key);
-                if (key != 'sortableItem' && key != 'uiSortable' ){
-                    if ((key == 'fluid' || key == 'background_video') && value == 'true'){
-                        $('#row_settings [data-attrname="' + key + '"]').attr('checked', true);
-                    } else if (key.indexOf('color') + 1) {
-                        $('#row_settings [data-attrname="' + key + '"]').val(value);
-                        if (value != ''){
-                            $('#row_settings [data-attrname="' + key + '"]').parent().parent().find('.minicolors-swatch-color, .minicolors-grid').css('background-color', value);
-                        } else {
-                            $('#row_settings [data-attrname="' + key + '"]').parent().parent().find('.minicolors-swatch-color, .minicolors-grid').css('background-color', 'transparent');
-                        }
-                    } else {
-                        $('#row_settings [data-attrname="'+ key +'"]').val(value);
-                    }
-                }
-            })
-        }
+
 
         /**
          * Prepare Row / Column Modal, fill it settings
@@ -1382,7 +1418,7 @@
          */
         gm.prepareSettingsModal = function(el, type) {
             $.each(el.data(), function(key, value) {
-                value = el.attr('data-'+key);
+                value = el.data(key);
                 if (key != 'sortableItem' && key != 'uiSortable' ){
                     if ((key == 'fluid' || key == 'background_video') && value == 'true'){
                         $('#'+type+'_settings [data-attrname="' + key + '"]').attr('checked', true);
@@ -1397,6 +1433,8 @@
                         $('.gm-media-preview').attr('src', value);
                         $('[data-attrname="background_image"]').val(value);
                     } else {
+                        console.log('#'+type+'_settings [data-attrname="'+ key +'"]');
+                        console.log(value);
                         $('#'+type+'_settings [data-attrname="'+ key +'"]').val(value);
                     }
                 }
@@ -1406,15 +1444,47 @@
         /**
          * Save Row Settings
          * @method saveSettings
-         * @param {object} row/col - row to act on
+         * @param {object} row/column - row to act on
          * @param string type - row/column type
          * @returns null
          */
-        gm.saveSettings = function (row, type) {
+        gm.saveSettings = function (el, type) {
+            $(el[0]).removeClass();
+            if (type == 'row'){
+                $(el[0]).addClass(gm.options.rowClass + " " + gm.options.gmEditClass);
+            } else if (type == 'column'){
+                $(el[0]).addClass(gm.options.colClass)
+                    .addClass(gm.options.gmEditClass)
+                    .addClass(gm.options.colAdditionalClass);
+            }
+
             $('#'+type+'_settings').find('input, select').each(function () {
                 var this_input = $(this);
+                var value = this_input.val();
+
+
                 $(this_input.data()).each(function () {
-                    $(row[0]).attr('data-'+this.attrname, this_input.val());
+                    if (this.type == 'class' && value){
+                        $(el[0]).addClass(this.attrname);
+                    } else if (this.type == 'css' && value) {
+                        if (this.attrname == 'background_image') {
+                            $(el[0]).css('background-image', 'url("'+value+'")');
+                        } else {
+                            $(el[0]).css(this.attrname.replace('_', '-'), value);
+                        }
+                    } else if (this.type == 'custom_class' && value) {
+                        $(el[0]).addClass(value);
+                    } else if (this.type == 'custom_id' && value) {
+                        $(el[0]).attr('id', value);
+                    } else if (this.type == 'checkbox' && $('[data-attrname="'+this.attrname+'"]').is(':checked')) {
+                        value = true;
+                    } else if (this.type == 'col_offset' && value) {
+                        $(el[0]).addClass('col-'+this.attrname.replace('_', '-')+'-'+value);
+                    } else if (this.type == 'col_width' && value) {
+                        $(el[0]).addClass('col-'+this.attrname.replace('width_', '')+'-'+value);
+                    }
+
+                    $(el[0]).attr('data-'+this.attrname, value);
                 });
             });
         }
@@ -1571,6 +1641,11 @@
 
         // Controls for content elements
         controlContentElem: '<div class="gm-controls-element"> <a class="gm-move fa fa-arrows" href="#" title="Move"></a> <a class="gm-delete fa fa-times" href="#" title="Delete"></a> </div>',
+        /*
+         Responsitive Array helper
+         */
+        gmRespond: ['xs', 'sm', 'md', 'lg'],
+
    /*
      General editing classes---------------
   */
@@ -1682,7 +1757,7 @@
         colPhoneSelector: "div[class*=col-xs-]",
 
         // String used to temporarily rename column classes not in use
-        classRenameSuffix: "-clsstmp",
+        classRenameSuffix: "",
 
         // Default layout mode loaded after init
         layoutDefaultMode: "auto",
@@ -1695,31 +1770,43 @@
 
         // Buttons to prepend to each column
         colButtonsPrepend: [
-              {
-                 title:"Move",
-                 element: "a",
-                 btnClass: "gm-moveCol pull-left",
-                 iconClass: "fa fa-arrows "
-              },
-              {
-                   title:"Column Settings",
-                   element: "a",
-                   btnClass: "pull-right gm-colSettings",
-                   iconClass: "fa fa-cog"
-                },
-               {
-                 title:"Make Column Narrower",
-                 element: "a",
-                 btnClass: "gm-colDecrease pull-left",
-                 iconClass: "fa fa-minus"
-              },
-              {
-               title:"Make Column Wider",
-               element: "a",
-               btnClass: "gm-colIncrease pull-left",
-               iconClass: "fa fa-plus"
-              }
-            ],
+            {
+                title: "Move",
+                element: "a",
+                btnClass: "gm-moveCol pull-left",
+                iconClass: "fa fa-arrows "
+            },
+            {
+                title: "Column Settings",
+                element: "a",
+                btnClass: "pull-right gm-colSettings",
+                iconClass: "fa fa-cog"
+            },
+            {
+                title: "Make Column Narrower",
+                element: "a",
+                btnClass: "gm-colDecrease pull-left",
+                iconClass: "fa fa-minus"
+            },
+            {
+                title: "Make Column Wider",
+                element: "a",
+                btnClass: "gm-colIncrease pull-left",
+                iconClass: "fa fa-plus"
+            },
+            {
+                title: "Slide Column Left",
+                element: "a",
+                btnClass: "gm-colSlideLeft pull-left",
+                iconClass: "fa fa-arrow-left"
+            },
+            {
+                title: "Slide Column Right",
+                element: "a",
+                btnClass: "gm-colSlideRight pull-left",
+                iconClass: "fa fa-arrow-right"
+            }
+        ],
 
         // Buttons to append to each column
         colButtonsAppend: [

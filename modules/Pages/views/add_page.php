@@ -1,13 +1,45 @@
+<div class="row-fluid">
+    <div class="span12">
+
+        <div class="btn-toolbar" id="toolbar-btns">
+            <div class="btn-wrapper" id="toolbar-save">
+                <button type="button" onclick="SavePage ()" class="btn btn-success">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+                </button>
+            </div>
+
+            <div class="btn-wrapper" id="toolbar-save-close">
+                <button type="button" onclick="" class="btn btn-primary">
+                    <i class="fa fa-check-square" aria-hidden="true"></i> Save &amp; Close
+                </button>
+            </div>
+
+            <div class="btn-wrapper" id="toolbar-save-copy">
+                <button type="button" onclick="" class="btn btn-info">
+                    <i class="fa fa-clone" aria-hidden="true"></i> Save as Copy
+                </button>
+            </div>
+
+            <div class="btn-wrapper" id="toolbar-cancel">
+                <button type="button" onclick="" class="btn btn-danger">
+                    <i class="fa fa-window-close" aria-hidden="true"></i> Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div id="mycanvas" style="
     float: left;
     width: 77.21%;">
 
 </div>
 <div id="components" style="
-    width: 22.79%;
+    width: 22%;
     height: 1000px;
     border: 1px solid black;
-    float: left;">
+    float: right;">
     <div id="draggable"><p>Slider</p></div>
 </div>
 
@@ -110,7 +142,7 @@
 
 <div class="form-group">
     <label>Title Position</label>
-    <select class="form-control" data-attrname="title_position">
+    <select class="form-control" data-attrname="title_position" >
         <option value="gm-text-left">Left</option>
         <option value="gm-text-center" selected="">Center</option>
         <option value="gm-text-right">Right</option>
@@ -121,7 +153,7 @@
     <label>Background Color</label>
     <div class="minicolors minicolors-theme-bootstrap minicolors-position-bottom">
         <input type="text" class="form-control minicolors minicolors-input"
-               data-attrname="background_color"
+               data-attrname="background_color" data-type="css"
                placeholder="#rrggbb"
                value=""
                size="7">
@@ -152,7 +184,7 @@
     <label>Font Color</label>
     <div class="minicolors minicolors-theme-bootstrap minicolors-position-bottom">
         <input type="text" class="form-control minicolors minicolors-input"
-               data-attrname="color"
+               data-attrname="color" data-type="css"
                placeholder="#rrggbb"
                value=""
                size="7">
@@ -181,7 +213,7 @@
 <div class="form-group">
     <label>Background Image</label>
     <img class="gm-media-preview no-image" alt="">
-    <input type="hidden" data-attrname="background_image"
+    <input type="hidden" data-attrname="background_image" data-type="css"
            class="input-media addon-input"
            value="">
     <a class="btn btn-primary bg_image" data-toggle="modal" href="#media_manager">Select Image</a>
@@ -194,7 +226,7 @@
 
 <div class="form-group">
     <label>Background Repeat</label>
-    <select class="form-control" data-attrname="background_repeat" >
+    <select class="form-control" data-attrname="background_repeat" data-type="css">
         <option value="no-repeat" selected="">No Repeat</option>
         <option value="repeat">Repeat All</option>
         <option value="repeat-x">Repeat Horizontally</option>
@@ -206,7 +238,7 @@
 
 <div class="form-group">
     <label>Background Size</label>
-    <select class="form-control" data-attrname="background_size" >
+    <select class="form-control" data-attrname="background_size" data-type="css">
         <option value="cover" selected="">Cover</option>
         <option value="contain">Contain</option>
         <option value="inherit">Inherit</option>
@@ -218,18 +250,18 @@
 
 <div class="form-group">
     <label>Background Attachment</label>
-    <select class="form-control" data-attrname="background_attachment" >
-        <option value="fixed" selected="">Fixed</option>
+    <select class="form-control" data-attrname="background_attachment" data-type="css">
+        <option value="fixed" >Fixed</option>
         <option value="scroll">Scroll</option>
-        <option value="inherit">Inherit</option>
+        <option value="inherit" selected="">Inherit</option>
     </select>
     <p class="help-block">Set whether a background image is fixed or scrolls with the rest of the
         page</p>
 </div>
 
 <div class="form-group">
-    <label>Background Attachment</label>
-    <select class="form-control" data-attrname="background_position" >
+    <label>Background Position</label>
+    <select class="form-control" data-attrname="background_position" data-type="css">
         <option value="0 0" selected="">Left Top</option>
         <option value="0 50%">Left Center</option>
         <option value="0 100%">Left Bottom</option>
@@ -243,7 +275,7 @@
     <p class="help-block">Set the starting position of a background image.</p>
 </div>
 
-<div class="form-group">
+<div class="form-group" style="display: none;">
     <div class="mt-checkbox-list">
         <label class="mt-checkbox mt-checkbox-outline"> Enable video in the background
             <input type="checkbox" data-attrname="background_video">
@@ -253,24 +285,24 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group" style="display: none;">
     <label>URL for Background Video MP4</label>
     <input class="form-control addon-input addon-background_video_mp4" type="text"
-           data-attrname="background_video_mp4" value=""
+           data-attrname="background_video_mp4"  value=""
            placeholder="http://yoursite.com/video/video.mp4">
 </div>
 
-<div class="form-group">
+<div class="form-group" style="display: none;">
     <label>URL for Background Video OGV</label>
     <input class="form-control addon-input addon-background_video_ogv" type="text"
-           data-attrname="background_video_ogv" value=""
+           data-attrname="background_video_ogv"  value=""
            placeholder="http://yoursite.com/video/video.ogv">
 </div>
 
-<div class="form-group">
+<div class="form-group" >
     <label>Section ID</label>
     <input class="form-control addon-input addon-id"
-           type="text" data-attrname="id" value=""
+           type="text" data-attrname="id" data-type="custom_id" value=""
            placeholder="">
     <p class="help-block">Set the ID attribute for the specific element. An ID should be unique
         within a page, each element can have only one ID.</p>
@@ -279,7 +311,7 @@
 <div class="form-group">
     <label>CSS Class</label>
     <input class="form-control addon-input addon-class"
-           type="text" data-attrname="class" value=""
+           type="text" data-attrname="class" data-type="custom_class" value=""
            placeholder="">
     <p class="help-block">If you wish to style particular content element differently, then use this
         field to add a class name and then refer to it in your css file.</p>
@@ -288,7 +320,7 @@
 <div class="form-group">
     <label>Padding</label>
     <input class="form-control addon-input addon-padding"
-           type="text" data-attrname="padding" value=""
+           type="text" data-attrname="padding" data-type="css" value=""
            placeholder="10px 10px 10px 10px">
     <p class="help-block">Set all the padding area a the space between the content of the element
         and its border (Top Right Bottom Left). Negative values are not allowed.</p>
@@ -297,7 +329,7 @@
 <div class="form-group">
     <label>Margin</label>
     <input class="form-control addon-input addon-margin"
-           type="text" data-attrname="margin" value=""
+           type="text" data-attrname="margin" data-type="css" value=""
            placeholder="10px 10px 10px 10px">
     <p class="help-block">Set the margin for all four sides (Top Right Bottom Left). Negative values
         are also allowed.</p>
@@ -306,11 +338,51 @@
 <div class="form-group">
     <div class="mt-checkbox-list">
         <label class="mt-checkbox mt-checkbox-outline"> Fluid Row
-            <input type="checkbox" data-attrname="fluid">
+            <input type="checkbox"  data-attrname="fluid" data-type="checkbox">
             <span></span>
         </label>
         <p class="help-block">Enable this option to make this section fluid. Fluid row will help you to
             publish full width content like google map.</p>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="mt-checkbox-list">
+        <label class="mt-checkbox mt-checkbox-outline"> Hidden XS
+            <input type="checkbox" data-type="checkbox" data-attrname="hidden_xs">
+            <span></span>
+        </label>
+        <p class="help-block">Enable this option for hide this section on mobile (phone) devices with width < 768px.</p>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="mt-checkbox-list">
+        <label class="mt-checkbox mt-checkbox-outline"> Hidden SM
+            <input type="checkbox" data-type="checkbox" data-attrname="hidden_sm">
+            <span></span>
+        </label>
+        <p class="help-block">Enable this option for hide this section on mobile (tablet) devices with width ≥ 768px and < 992px.</p>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="mt-checkbox-list">
+        <label class="mt-checkbox mt-checkbox-outline"> Hidden MD
+            <input type="checkbox" data-type="checkbox" data-attrname="hidden_md">
+            <span></span>
+        </label>
+        <p class="help-block">Enable this option for hide this section on (desktop) devices with width ≥ 992px and < 1200px.</p>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="mt-checkbox-list">
+        <label class="mt-checkbox mt-checkbox-outline"> Hidden LG
+            <input type="checkbox" data-type="checkbox" data-attrname="hidden_lg">
+            <span></span>
+        </label>
+        <p class="help-block">Enable this option for hide this section on (desktop) devices with width ≥ 1200px.</p>
     </div>
 </div>
 
@@ -419,6 +491,127 @@
                         <p class="help-block">If you wish to style particular content element differently, then use this field to
                             add a class name and then refer to it in your css file.</p>
                     </div>
+
+                    <div class="form-group">
+                        <label>XS Width</label>
+                        <select class="form-control" data-attrname="width_xs" data-type="col_width">
+                            <? for ($i=1;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set width of column for mobile (phone) devices with width < 768px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>SM Width</label>
+                        <select class="form-control" data-attrname="width_sm" data-type="col_width">
+                            <? for ($i=1;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set width of column for mobile (tablet) devices with width ≥ 768px and < 992px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>MD Width</label>
+                        <select class="form-control" data-attrname="width_md" data-type="col_width">
+                            <? for ($i=1;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set width of column for (desktop) devices with width ≥ 992px and < 1200px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>LG Width</label>
+                        <select class="form-control" data-attrname="width_lg" data-type="col_width">
+                            <? for ($i=1;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set width of column for (desktop) devices with width ≥ 1200px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>XS Offset</label>
+                        <select class="form-control" data-attrname="xs_offset" data-type="col_offset">
+                            <? for ($i=0;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set offset of column for mobile (phone) devices with width < 768px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>SM Offset</label>
+                        <select class="form-control" data-attrname="sm_offset" data-type="col_offset">
+                            <? for ($i=0;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set offset of column for mobile (tablet) devices with width ≥ 768px and < 992px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>MD Offset</label>
+                        <select class="form-control" data-attrname="md_offset" data-type="col_offset">
+                            <? for ($i=0;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set offset of column for (desktop) devices with width ≥ 992px and < 1200px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>LG Offset</label>
+                        <select class="form-control" data-attrname="lg_offset" data-type="col_offset">
+                            <? for ($i=0;$i<=12;$i++) {
+                                echo "<option value='$i'>$i</option>";
+                            }?>
+                        </select>
+                        <p class="help-block">Set offset of column for (desktop) devices with width ≥ 1200px.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="mt-checkbox-list">
+                            <label class="mt-checkbox mt-checkbox-outline"> Hidden XS
+                                <input type="checkbox" data-type="checkbox" data-attrname="hidden_xs">
+                                <span></span>
+                            </label>
+                            <p class="help-block">Enable this option for hide this section on mobile (phone) devices with width < 768px.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="mt-checkbox-list">
+                            <label class="mt-checkbox mt-checkbox-outline"> Hidden SM
+                                <input type="checkbox" data-type="checkbox" data-attrname="hidden_sm">
+                                <span></span>
+                            </label>
+                            <p class="help-block">Enable this option for hide this section on mobile (tablet) devices with width ≥ 768px and < 992px.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="mt-checkbox-list">
+                            <label class="mt-checkbox mt-checkbox-outline"> Hidden MD
+                                <input type="checkbox" data-type="checkbox" data-attrname="hidden_md">
+                                <span></span>
+                            </label>
+                            <p class="help-block">Enable this option for hide this section on (desktop) devices with width ≥ 992px and < 1200px.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="mt-checkbox-list">
+                            <label class="mt-checkbox mt-checkbox-outline"> Hidden LG
+                                <input type="checkbox" data-type="checkbox" data-attrname="hidden_lg">
+                                <span></span>
+                            </label>
+                            <p class="help-block">Enable this option for hide this section on (desktop) devices with width ≥ 1200px.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -469,14 +662,20 @@
 
 <script>
 
-
-
-
+    function SavePage () {
+        var rows = [];
+        $('.container > .row.gm-editing').each(function (r) {
+            var row_obj = $(this).data();
+            row_obj.columns = [];
+            $(this).children('.column').each(function (c) {
+                row_obj.columns[c] = $(this).data();
+            });
+            rows[r] = row_obj;
+        });
+        console.log(rows)
+    }
 
     $(document).ready(function(){
-
-
-
         $("#mycanvas").gridmanager(
             {
                 debug: 1,
@@ -513,13 +712,4 @@
 
     });
 </script>
-
-
-<!--                    <iframe id="kc_frame"-->
-<!--                            name="kcfinder_alone"-->
-<!--                            src="/assets/vendor/ckeditor/plugins/kcfinder/browse.php?type=images&CKEditor=editor2&CKEditorFuncNum=111&langCode=ru"-->
-<!--                            frameborder="0" width="100%" height="100%"-->
-<!--                            style="padding: 0px; margin-top: 8px;-->
-<!--                            border-radius: 4px; border: 1px solid rgb(107, 107, 107);-->
-<!--                            box-shadow: rgb(107, 107, 107) 0px 0px 4px; height: 794px;"></iframe>-->
 

@@ -32,3 +32,16 @@ img.gm-media-preview.no-image {
     margin-bottom: 10px;
     max-height: 300px;
 }
+
+#toolbar-btns {
+    margin-left: 0px;
+}
+
+#toolbar-btns .btn-wrapper {
+    margin-right: 10px;
+    float: left;
+}
+
+.pull-left.gm-layout-mode button.btn.btn-xs.btn-primary.dropdown-toggle {
+    border-radius: 0px;
+}
