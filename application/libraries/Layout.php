@@ -103,7 +103,7 @@ class Layout
         }
 
         //Pattern get all scripts
-        $regex = "/\<script(.*?)?\>(.|\\n)*?\<\/script\>/i";
+        $regex = '#<script[^>]*>.*?</script>#is';
 
         //Save it to array
         preg_match_all($regex, $content, $scripts);
@@ -120,11 +120,23 @@ class Layout
             $content = $this->CI->load->view($this->content, $data, $return);
         }
 
+        //Load notification messages
+        if ($this->CI->session->flashdata('notification')){
+            $load_notify = '<script>$(document).ready(function () {';
+            foreach ($this->CI->session->flashdata('notification') as $notification){
+                $load_notify .= 'toastr.'.$notification['type'].'("'.$notification['message'].'", "'.$notification['title'].'");';
+            }
+            $load_notify .= '});</script>';
+        }
+
 
         //Render Footer
         if ($this->footer) {
             $data['asset_bottom_js_ie9'] = $this->assets['asset_bottom_js_ie9'];
             $data['asset_bottom_js'] = $this->assets['asset_bottom_js'];
+            if (isset($load_notify)) {
+                $data['asset_bottom_js'] .= $load_notify;
+            }
             $footer = $this->CI->load->view($this->footer, $data, $return);
         }
 

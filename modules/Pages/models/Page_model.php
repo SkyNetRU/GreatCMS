@@ -37,7 +37,6 @@ class Page_model extends CI_Model
     }
 
     public function add_page($data){
-
         return ($this->db->insert($this->table,$data))? $this->db->insert_id() : FALSE;
     }
 

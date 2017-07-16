@@ -33,6 +33,14 @@ img.gm-media-preview.no-image {
     max-height: 300px;
 }
 
+img.gm-media-preview.no-image.slide_image {
+    max-height: 100%;
+}
+
+div#accordion1 {
+    margin-top: 10px;
+}
+
 #toolbar-btns {
     margin-left: 0px;
 }
@@ -44,4 +52,81 @@ img.gm-media-preview.no-image {
 
 .pull-left.gm-layout-mode button.btn.btn-xs.btn-primary.dropdown-toggle {
     border-radius: 0px;
+}
+
+.vertical-margin {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.nopadding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.nopadding-all {
+    padding: 0px;
+}
+
+.nopadding-all-force{
+    padding: 0px !important;
+}
+
+.no-border {
+    border: 0px;
+}
+
+.no-border-force {
+    border: 0px !important;
+}
+
+.no-border-side {
+    border-right: 0px;
+    border-left: 0px;
+}
+
+.no-border-side-force {
+    border-right: 0px !important;
+    border-left: 0px !important;
+}
+
+.no-border-bottom {
+    border-bottom: 0px !important;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.list-item-content p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.form-horizontal .control-label {
+    display: inline-block;
+    padding-left: 15px;
+    float: left;
+    width: 16.66666%;
+    max-width: 100px !important;
+}
+
+.panel-group.accordion .ui-sortable-placeholder.ui-state-highlight {
+    border: 1px solid transparent;
+    background: transparent;
+    color: #fff;
+}
+
+.accordion-delete {
+    float: right;
+    margin-right: 15px;
+    margin-top: 7px;
+}
+
+.accordion .panel .panel-title .accordion-toggle {
+    padding: 15px 15px;
+}
+
+h4.panel-title.ui-sortable-handle a{
+    display: inline-block !important;
 }

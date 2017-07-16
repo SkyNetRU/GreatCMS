@@ -72,15 +72,18 @@ class Pages extends MX_Controller
         $this->layout->_render("Pages/page_list", $data);
     }
 
-    public function add_page(){
-        if(!$this->session->userdata('login')) {
-            redirect('login');
-        }else {
-            $this->load->view('add_page');
-        }
+    public function add_page($id = null){
+        $this->load->view('add_page');
     }
 
-    public function edit_page($id){
+    public function edit_page($id = null){
+
+        $content = '';
+        if ($id){
+            $page = $this->page_model->get_page($id);
+            $this->load->helper('Pages/Page_Construct');
+            $content = Page_Construct($page);
+        }
 
         //Load Module CSS's
         $this->layout->css += array(
@@ -96,7 +99,8 @@ class Pages extends MX_Controller
             '/assets/vendor/ckeditor/ckeditor.js',
             '/assets/vendor/ckeditor/adapters/jquery.js',
             '/assets/global/plugins/bxslider/jquery.bxslider.min.js',
-            '/assets/global/plugins/jquery-minicolors/jquery.minicolors.js'
+            '/assets/global/plugins/jquery-minicolors/jquery.minicolors.js',
+            '/assets/global/plugins/custom.js'
         );
 
         //Collapse Left SideBar
@@ -109,6 +113,9 @@ class Pages extends MX_Controller
             'name' => $this->security->get_csrf_token_name(),
             'hash' => $this->security->get_csrf_hash()
         );
+
+        $data['page_id'] = $id;
+        $data['content'] = $content;
         $this->layout->_render("Pages/add_page", $data);
     }
 
@@ -122,28 +129,34 @@ class Pages extends MX_Controller
     }
 
     public function save_page(){
-        $text = $_REQUEST['page'];
-        $title = (strlen($_REQUEST['title']) > 0) ? $_REQUEST['title'] : "No Title";
-        $safi = $this->safisha($text);
-        $data['title'] = $title;
-        $data['content'] = $safi;
-        $data['original'] = "<db>".$text."</db>";
-
-        $this->page_model->add_page($data);
-        //$data['safi'] = $safi;
-        //$this->load->view('page_list',$data);
+        $data = array (
+            'title' => $this->input->post('title'),
+            'content' => json_encode($this->input->post('content')),
+            'alias' => $this->input->post('alias'),
+            'created' => date("Y-m-d H:i:s"),
+            'created_by' => $this->session->userdata('user_id'),
+            'meta_desc' => $this->input->post('meta_desc'),
+            'meta_keywords' => $this->input->post('meta_keywords'),
+            'meta_author' => $this->input->post('meta_author'),
+            'published' => $this->input->post('published'),
+        );
+        echo json_encode($this->page_model->add_page($data));
     }
-    public function update_page($id){
-        $text = $_REQUEST['page'];
-        $title = (strlen($_REQUEST['title']) > 0) ? $_REQUEST['title'] : "No Title";
-        $safi = $this->safisha($text);
-        $data['title'] = $title;
-        $data['content'] = $safi;
-        $data['original'] = "<db>".$text."</db>";
 
-        $this->page_model->update_page($id,$data);
-        //$data['safi'] = $safi;
-        //$this->load->view('page_list',$data);
+    public function update_page($id){
+        $data = array (
+            'title' => $this->input->post('title'),
+            'content' => json_encode($this->input->post('content')),
+            'alias' => $this->input->post('alias'),
+            'last_modified' => date("Y-m-d H:i:s"),
+            'last_modified_by' => $this->session->userdata('user_id'),
+            'meta_desc' => $this->input->post('meta_desc'),
+            'meta_keywords' => $this->input->post('meta_keywords'),
+            'meta_author' => $this->input->post('meta_author'),
+            'published' => $this->input->post('published'),
+        );
+
+        echo json_encode($this->page_model->update_page($id,$data));
     }
 
     function  show_text($id){

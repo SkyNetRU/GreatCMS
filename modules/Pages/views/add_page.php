@@ -33,7 +33,7 @@
 <div id="mycanvas" style="
     float: left;
     width: 77.21%;">
-
+<?=$content;?>
 </div>
 <div id="components" style="
     width: 22%;
@@ -662,18 +662,9 @@
 
 <script>
 
-    function SavePage () {
-        var rows = [];
-        $('.container > .row.gm-editing').each(function (r) {
-            var row_obj = $(this).data();
-            row_obj.columns = [];
-            $(this).children('.column').each(function (c) {
-                row_obj.columns[c] = $(this).data();
-            });
-            rows[r] = row_obj;
-        });
-        console.log(rows)
-    }
+    <?= $page_id ? 'var page_id = '.$page_id.';' : '' ?>
+    var token_name = '<?=$csrf['name'];?>';
+    var hash = '<?=$csrf['hash'];?>';
 
     $(document).ready(function(){
         $("#mycanvas").gridmanager(

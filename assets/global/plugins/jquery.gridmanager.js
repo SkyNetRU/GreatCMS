@@ -422,9 +422,11 @@
             }).on("click", "a.gm-addRow", function(){
                gm.log("Adding nested row");
                $(this).closest("." +gm.options.gmEditClass).append(
-                  $("<div>").addClass(gm.options.rowClass)
-                            .html(gm.createCol(6))
-                            .append(gm.createCol(6)));
+                  //$("<div>").addClass(gm.options.rowClass)
+                  //          .html(gm.createCol(6))
+                  //          .append(gm.createCol(6)));
+                   gm.createRow([6,6], true)
+               )
                gm.reset();
 
             // Decrease Column Size
@@ -864,45 +866,53 @@
          * @param {array} colWidths - array of css class integers, i.e [2,4,5]
          * @returns row
          */
-        gm.createRow = function(colWidths){
-          var container = $("<div/>", {"class": "container"});
-          var row = $("<div/>", {"class": gm.options.rowClass + " " + gm.options.gmEditClass,
-              "data-title":"",
-              "data-title_fontsize" : "",
-              "data-title_fontweight" : "",
-              "data-title_text_color" : "",
-              "data-title_margin_top" : "",
-              "data-title_margin_bottom" : "",
-              "data-background_color" : "",
-              "data-color" : "",
-              "data-background_video_mp4" : "",
-              "data-background_video_ogv" : "",
-              "data-id" : "",
-              "data-class" : "",
-              "data-padding" : "",
-              "data-margin" : "",
-              "data-background_image": "",
-              "data-background_repeat" : "no-repeat",
-              "data-title_position" : "gm-text-center",
-              "data-background_position" : "0 0",
-              "data-background_attachment" : "fixed",
-              "data-background_size" : "cover",
-              "data-heading_selector" : "h1",
-              "data-fluid" : false,
-              "data-background_video" : false,
-              "data-hidden_xs" : false,
-              "data-hidden_sm" : false,
-              "data-hidden_md" : false,
-              "data-hidden_lg" : false
+        gm.createRow = function(colWidths, wrap_container) {
+            wrap_container = wrap_container || false;
+            if (!wrap_container) {
+                var container = $("<div/>", {"class": "container"});
+            }
 
-          });
-            $.each(colWidths, function(i, val){
+            var row = $("<div/>", {
+                "class": gm.options.rowClass + " " + gm.options.gmEditClass,
+                "data-title": "",
+                "data-title_fontsize": "",
+                "data-title_fontweight": "",
+                "data-title_text_color": "",
+                "data-title_margin_top": "",
+                "data-title_margin_bottom": "",
+                "data-background_color": "",
+                "data-color": "",
+                "data-background_video_mp4": "",
+                "data-background_video_ogv": "",
+                "data-id": "",
+                "data-class": "",
+                "data-padding": "",
+                "data-margin": "",
+                "data-background_image": "",
+                "data-background_repeat": "no-repeat",
+                "data-title_position": "gm-text-center",
+                "data-background_position": "0 0",
+                "data-background_attachment": "fixed",
+                "data-background_size": "cover",
+                "data-heading_selector": "h1",
+                "data-fluid": false,
+                "data-background_video": false,
+                "data-hidden_xs": false,
+                "data-hidden_sm": false,
+                "data-hidden_md": false,
+                "data-hidden_lg": false
+
+            });
+            $.each(colWidths, function (i, val) {
                 row.append(gm.createCol(val));
-              });
+            });
             gm.log("++ Created Row");
 
-            row = container.append(row);
-          return row;
+            if (!wrap_container) {
+                row = container.append(row);
+            }
+            //row = container.append(row);
+            return row;
         };
 
         /**
@@ -1117,8 +1127,8 @@
           gm.initNewContentElem(elem);
             $(elem).find('.gm-content').droppable({
                 drop: function( event, ui ) {
-                    //$(this).html($(this).html() + ui.draggable.html());
-                    $(this).html(slider);
+                    $(this).html($(this).html() + ui.draggable.html());
+                    //$(this).html(slider);
                     $('.bxslider').bxSlider({
                         auto:true
                     });
@@ -1484,7 +1494,7 @@
                         $(el[0]).addClass('col-'+this.attrname.replace('width_', '')+'-'+value);
                     }
 
-                    $(el[0]).attr('data-'+this.attrname, value);
+                    $(el[0]).data(this.attrname, value);
                 });
             });
         }
@@ -1521,41 +1531,6 @@
 
             });
         }
-
-        /**
-         * Reset Row Modal
-         * @method resetRowModal
-         * @returns null
-         */
-        gm.resetRowModal = function() {
-
-            $('#row_settings')
-                .find(
-                '[data-attrname="title"], ' +
-                '[data-attrname="title_fontsize"],' +
-                '[data-attrname="title_fontweight"], ' +
-                '[data-attrname="title_text_color"], ' +
-                '[data-attrname="title_margin_top"], ' +
-                '[data-attrname="title_margin_bottom"], ' +
-                '[data-attrname="background_color"], ' +
-                '[data-attrname="color"], ' +
-                '[data-attrname="background_video_mp4"], ' +
-                '[data-attrname="background_video_ogv"], ' +
-                '[data-attrname="id"], ' +
-                '[data-attrname="class"], ' +
-                '[data-attrname="padding"], ' +
-                '[data-attrname="margin"]').val('');
-
-            $('#row_settings').find('[data-attrname="background_repeat"]').val('no-repeat');
-            $('#row_settings').find('[data-attrname="title_position"]').val('gm-text-center');
-            $('#row_settings').find('[data-attrname="background_position"]').val('0 0');
-            $('#row_settings').find('[data-attrname="background_attachment"]').val('fixed');
-            $('#row_settings').find('[data-attrname="background_size"]').val('cover');
-            $('#row_settings').find('[data-attrname="heading_selector"]').val([]);
-            $('#row_settings').find('[data-attrname="fluid"], [data-attrname="background_video"]').attr('checked', false);
-        }
-
-
 
         /**
          * Generic logging function

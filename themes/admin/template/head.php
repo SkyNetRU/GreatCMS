@@ -7,10 +7,10 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title><?= $page_title;?></title>
+    <title><?= isset($page_title) ? $page_title : 'GreatCMS';?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="<?= $meta_description;?>" name="description" />
+    <meta content="<?= isset($meta_description) ? $meta_description : '';?>" name="description" />
     <meta content="Nikolai Demin https://www.upwork.com/fl/nikolaidemin" name="author" />
     <?= $asset_css;?>
     <?= $asset_top_js;?>
